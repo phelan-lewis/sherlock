@@ -1,0 +1,41 @@
+{
+  "name": "CHANGE THIS : Extension boilerplate",
+  "version": "0.0.1",
+  "manifest_version": 2,
+  "description": "This extension was created with the awesome extensionizr.com",
+  "homepage_url": "http://extensionizr.com",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "src/bg/background.js",
+      "js/jquery/jquery.min.js"
+    ],
+    "persistent": false
+  },
+  "page_action": {
+    "default_icon": "icons/icon19.png",
+    "default_title": "page action demo",
+    "default_popup": "src/page_action/page_action.html"
+  },
+  "permissions": [
+    "clipboardRead",
+    "clipboardWrite"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://app.shopify.com/services/internal/shops/223346690"
+      ],
+      "js": [
+        "js/jquery/jquery.min.js",
+        "src/inject/inject.js",
+        "src/inject/internalCard.js"
+      ]
+    }
+  ]
+}
