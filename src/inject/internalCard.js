@@ -2,21 +2,43 @@ $(function() {
 
   //this is a variable for testing purposes
   var insertName = "Hello Jordan, this is a proof concept";
-
   var cardStore = [];
-
   var cardNames = [];
+  var tempCard = [];
 
   //this function creates the card in intrnal along the right sidebar
-  var addSomeData = function(){
-      $(".ui-layout__section--secondary").append("<div class='ui-layout__item sherlockCard'></div>")
+  var createCardInInternal = function(firstCardStore){
+      $(".ui-layout__section--secondary").prepend("<div class='ui-layout__item sherlockCard'></div>")
       $(".sherlockCard").append("<section class='ui-card box-card sherlock'></section>")
       $(".sherlock").append("<h2 class='ui-card__header'>This is a Test Card</h2>")
       $(".sherlock").append("<div class='ui-card__section'>" + insertName + "</div>")
-      $.each(cardNames, function( index, value ) {
-        $(".sherlock").append("<div class='ui-card__section'> Card "+ index + ": "  + value + "</div>")
-      })
+      $(".sherlock").append(firstCardStore)
+      //$.each(cardNames, function( index, value ) {
+      //  $(".sherlock").append("<div class='ui-card__section'> Card "+ index + ": "  + value + "</div>")
+      //})
   }
+
+
+  function addUICardsToCardStore(context){
+    $(context).each(function( i , elem ){
+        var currentCard = $(this).html();
+        //console.log( $(this) );
+        cardStore.push(currentCard)
+    })
+  }
+
+  function parsingTheCards(cardStore){
+    $(cardStore).each(function(i, elem ){
+      //number 26 is the billing one
+      if (i === 26) {
+        createCardInInternal(elem)
+        console.log(elem);
+      } else {
+        console.log("I am having fun");
+      }
+    })
+  }
+
 
   function getCards(context) {
     var planCardA = $("a[id*='plan']");
@@ -33,8 +55,12 @@ $(function() {
 
           var cardObject = $(this);
 
-          $.each(cardObject, function( index, value ){
-              console.log("This is Index: " + value );
+          var testingThisVar = this;
+
+
+
+          $.each(testingThisVar, function( index, value ){
+              //console.log("This is Index: " + value );
           })
 
           var override = false;
@@ -80,6 +106,7 @@ $(function() {
 
   getCards("primary");
   getCards("secondary");
-  addSomeData()
+  addUICardsToCardStore(".ui-card")
+  parsingTheCards(cardStore)
 
 });
