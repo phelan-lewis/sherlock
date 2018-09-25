@@ -18,6 +18,11 @@ $(function() {
       //})
   }
 
+  //this funcitons parese the billing card to display logic
+  function parseBillingCard(elem) {
+
+    createCardInInternal(elem)
+  }
 
   function addUICardsToCardStore(context){
     $(context).each(function( i , elem ){
@@ -31,7 +36,7 @@ $(function() {
     $(cardStore).each(function(i, elem ){
       //number 26 is the billing one
       if (i === 26) {
-        createCardInInternal(elem)
+        parseBillingCard(elem);
         console.log(elem);
       } else {
         console.log("I am having fun");
@@ -44,7 +49,6 @@ $(function() {
     var planCardA = $("a[id*='plan']");
       planCardA.attr('id', 'plan');
       planCardA.attr('href', '#plan');
-
     // gather all of the card IDs
     var cardIds = $('.ui-anchor')
       .map(function() {
@@ -52,17 +56,6 @@ $(function() {
         if (($(this).parents('.ui-card').length > 0) && ($(this).parents('.ui-layout__section--' + context).length > 0)) {
           var good = true;
           var id = this.id;
-
-          var cardObject = $(this);
-
-          var testingThisVar = this;
-
-
-
-          $.each(testingThisVar, function( index, value ){
-              //console.log("This is Index: " + value );
-          })
-
           var override = false;
           var overvalue;
 
