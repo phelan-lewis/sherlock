@@ -1,7 +1,7 @@
 $(function() {
 
   //this is a variable for testing purposes
-  var insertName = "Hello Jordan, this is a proof concept";
+  var insertName = "This is Project Sherlock";
   var cardStore = [];
   var cardNames = [];
   var tempCard = [];
@@ -10,8 +10,8 @@ $(function() {
   var createCardInInternal = function(firstCardStore){
       $(".ui-layout__section--secondary").prepend("<div class='ui-layout__item sherlockCard'></div>")
       $(".sherlockCard").append("<section class='ui-card box-card sherlock'></section>")
-      $(".sherlock").append("<h2 class='ui-card__header'>This is a Test Card</h2>")
-      $(".sherlock").append("<div class='ui-card__section'>" + insertName + "</div>")
+      $(".sherlock").append("<h2 class='ui-card__header'>" + insertName + "</h2>")
+      $(".sherlock").append("<div class='ui-card__section'></div>")
       $(".sherlock").append(firstCardStore)
       //$.each(cardNames, function( index, value ) {
       //  $(".sherlock").append("<div class='ui-card__section'> Card "+ index + ": "  + value + "</div>")
@@ -20,8 +20,16 @@ $(function() {
 
   //this funcitons parese the billing card to display logic
   function parseBillingCard(elem) {
+    var billingCardTitle = $(elem).find('h2').text().trim();
+    console.log(billingCardTitle);
 
-    createCardInInternal(elem)
+    if (billingCardTitle === 'Monthly Staff Plan') {
+      console.log("I am working" + billingCardTitle);
+      var monthlyStaffCard = $("<div class='ui-card__section'> You have a staff account!</div>")
+      console.log(monthlyStaffCard);
+      createCardInInternal(monthlyStaffCard)
+    }
+
   }
 
   function addUICardsToCardStore(context){
@@ -34,10 +42,9 @@ $(function() {
 
   function parsingTheCards(cardStore){
     $(cardStore).each(function(i, elem ){
-      //number 26 is the billing one
+      //number 26 is the billing one PLEASE CHANGE ME -- famous last words ;p
       if (i === 26) {
         parseBillingCard(elem);
-        console.log(elem);
       } else {
         console.log("I am having fun");
       }
