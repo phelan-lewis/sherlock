@@ -4,7 +4,8 @@ $(function() {
   var insertName = "This is Project Sherlock";
   var cardStore = [];
   var cardNames = [];
-  var tempCard = [];
+  var decisionTreeList = [];
+  var cardObject = {};
 
   //this function creates the card in intrnal along the right sidebar
   var createCardInInternal = function(firstCardStore){
@@ -13,23 +14,23 @@ $(function() {
       $(".sherlock").append("<h2 class='ui-card__header'>" + insertName + "</h2>")
       $(".sherlock").append("<div class='ui-card__section'></div>")
       $(".sherlock").append(firstCardStore)
-      //$.each(cardNames, function( index, value ) {
-      //  $(".sherlock").append("<div class='ui-card__section'> Card "+ index + ": "  + value + "</div>")
-      //})
+      $.each(decisionTreeList, function( index, value ) {
+        $(".sherlock").append(value)
+      })
   }
 
   //this funcitons parese the billing card to display logic
   function parseBillingCard(elem) {
     var billingCardTitle = $(elem).find('h2').text().trim();
-    console.log(billingCardTitle);
 
     if (billingCardTitle === 'Monthly Staff Plan') {
-      console.log("I am working" + billingCardTitle);
-      var monthlyStaffCard = $("<div class='ui-card__section'> You have a staff account!</div>")
-      console.log(monthlyStaffCard);
+      var yesMonthlyStaffPlan = $("<div class='ui-card__section'><h6>Monthly Staff Plan</h6><p>Yes</p></div>")
+      decisionTreeList.push(yesMonthlyStaffPlan);
+      var monthlyStaffCard = $("<div class='ui-card__section'>You have a staff account!</div>")
       createCardInInternal(monthlyStaffCard)
+    } else {
+      // do next function
     }
-
   }
 
   function addUICardsToCardStore(context){
@@ -98,14 +99,16 @@ $(function() {
 
       $.each(attempts, function(key, attempt) {
         if (attempt.length > 0) {
+          console.log("attempt number " + key + ": " + attempt );
           cardNames.push(attempt);
         }
       });
     });
   }
 
-  getCards("primary");
-  getCards("secondary");
+  //getCards("primary");
+  //getCards("secondary");
+
   addUICardsToCardStore(".ui-card")
   parsingTheCards(cardStore)
 
