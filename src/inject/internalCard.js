@@ -7,15 +7,30 @@ $(function() {
   var decisionTreeList = [];
   var cardObject = {};
 
+  $( "#toggle-findMoreButton" ).click(function() {
+    console.log("BUTTON CLICKED");
+    $( ".decisionNodeDiv" ).toggle( "slow" );
+  })
+
   //this function creates the card in intrnal along the right sidebar
   var createCardInInternal = function(firstCardStore){
-      $(".ui-layout__section--secondary").prepend("<div class='ui-layout__item sherlockCard'></div>")
-      $(".sherlockCard").append("<section class='ui-card box-card sherlock'></section>")
-      $(".sherlock").append("<h2 class='ui-card__header'>" + insertName + "</h2>")
-      $(".sherlock").append("<div class='ui-card__section'></div>")
+      $(".ui-layout__section--secondary").prepend("<div/>", { class:'ui-layout__item sherlockCard'})
+
+      var findMoreDiv     = $('<div/>', { class: 'ui-card__section findMoreButton', id: "toggle-findMoreButton" }).text("Find out more")
+      var decisionNodeDiv = $('<div/>', { class: 'decisionNodeDiv' })
+
+      $(".sherlockCard").append("<section/>", { class:'ui-card box-card sherlock'})
+      $(".sherlock").append("<h2/>", { class:'ui-card__header'}).text(insertName)
+      $(".sherlock").append("<div/>", { class: "ui-card__section"})
+      $(".sherlock").append("<div/>", { class:'ui-card__section'})
       $(".sherlock").append(firstCardStore)
+      //find out more find out less
+      $(".sherlock").append(findMoreDiv)
+      //$(".findMoreDiv").append(findMoreButton)
+      $(".findMoreDiv").append(decisionNodeDiv)
       $.each(decisionTreeList, function( index, value ) {
-        $(".sherlock").append(value)
+        var eachDecisionNode = $('<div/>', { class: 'ui-card__section' }).html(value)
+        $(".decisionNodeDiv").append(eachDecisionNode)
       })
   }
 
@@ -24,11 +39,12 @@ $(function() {
     var billingCardTitle = $(elem).find('h2').text().trim();
 
     if (billingCardTitle === 'Monthly Staff Plan') {
-      var yesMonthlyStaffPlan = $("<div class='ui-card__section'><h6>Monthly Staff Plan</h6><p>Yes</p></div>")
+      var yesMonthlyStaffPlan = $("<div/>", { class:'ui-card__section'}).append("<h6/>").text("Monthly Staff Plan").append("<p/>").text("Yes")
       decisionTreeList.push(yesMonthlyStaffPlan);
-      var monthlyStaffCard = $("<div class='ui-card__section'>You have a staff account!</div>")
+      var monthlyStaffCard = $('<div/>', { class:'ui-card__section'}).text('You have a staff account!')
       createCardInInternal(monthlyStaffCard)
     } else {
+      var noMonthlyStaffPlan = $("<div/>", { class:'ui-card__section'}).append("<h6/>").text("Monthly Staff Plan").append("<p/>").text("No")
       // do next function
     }
   }

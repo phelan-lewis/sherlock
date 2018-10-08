@@ -1,6 +1,6 @@
 # sherlock
 
-This is a project to help with business coahcing call
+This is a project to help with business coaching call
 
 ### Example of how to generate safe jquery HTML elements
 ```
