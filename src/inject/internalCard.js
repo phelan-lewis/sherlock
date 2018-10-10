@@ -14,19 +14,19 @@ $(function() {
 
   //this function creates the card in intrnal along the right sidebar
   var createCardInInternal = function(firstCardStore){
-      $(".ui-layout__section--secondary").prepend("<div/>", { class:'ui-layout__item sherlockCard'})
+      $(".ui-layout__section--secondary").prepend("<div class='ui-layout__item sherlockCard'></div>")
 
-      var findMoreDiv     = $('<div/>', { class: 'ui-card__section findMoreButton', id: "toggle-findMoreButton" }).text("Find out more")
+      var findMoreDiv     = $('<div/>', { class: 'ui-card__section findMoreDiv' })
+      var findMoreButton  = $('<div/>', { class: 'btn findMoreButton', id: "toggle-findMoreButton" }).text("Find out more")
       var decisionNodeDiv = $('<div/>', { class: 'decisionNodeDiv' })
 
-      $(".sherlockCard").append("<section/>", { class:'ui-card box-card sherlock'})
-      $(".sherlock").append("<h2/>", { class:'ui-card__header'}).text(insertName)
-      $(".sherlock").append("<div/>", { class: "ui-card__section"})
-      $(".sherlock").append("<div/>", { class:'ui-card__section'})
+      $(".sherlockCard").append("<section class='ui-card box-card sherlock'></section>")
+      $(".sherlock").append("<h2 class='ui-card__header'>" + insertName + "</h2>")
+      $(".sherlock").append("<div class='ui-card__section'></div>")
       $(".sherlock").append(firstCardStore)
       //find out more find out less
       $(".sherlock").append(findMoreDiv)
-      //$(".findMoreDiv").append(findMoreButton)
+      $(".findMoreDiv").append(findMoreButton)
       $(".findMoreDiv").append(decisionNodeDiv)
       $.each(decisionTreeList, function( index, value ) {
         var eachDecisionNode = $('<div/>', { class: 'ui-card__section' }).html(value)
@@ -36,15 +36,18 @@ $(function() {
 
   //this funcitons parese the billing card to display logic
   function parseBillingCard(elem) {
-    var billingCardTitle = $(elem).find('h2').text().trim();
+    // var below is commented out because internal change and how have to update the addUICardsToCardStore function
+    //var billingCardTitle = $(elem).find('h2').text().trim();
+    var billingCardTitle = 'Monthly Staff Plan';
+
 
     if (billingCardTitle === 'Monthly Staff Plan') {
-      var yesMonthlyStaffPlan = $("<div/>", { class:'ui-card__section'}).append("<h6/>").text("Monthly Staff Plan").append("<p/>").text("Yes")
+      var yesMonthlyStaffPlan = $("<div class='ui-stack-item'><h6>Monthly Staff Plan</h6><p>Yes</p></div>")
       decisionTreeList.push(yesMonthlyStaffPlan);
-      var monthlyStaffCard = $('<div/>', { class:'ui-card__section'}).text('You have a staff account!')
+      var monthlyStaffCard = $("<div class='ui-card__section'>You have a staff account!</div>")
       createCardInInternal(monthlyStaffCard)
     } else {
-      var noMonthlyStaffPlan = $("<div/>", { class:'ui-card__section'}).append("<h6/>").text("Monthly Staff Plan").append("<p/>").text("No")
+      var noMonthlyStaffPlan = $("<div class='ui-stack-item'><h6>Monthly Staff Plan</h6><p>No</p></div>")
       // do next function
     }
   }
@@ -52,6 +55,8 @@ $(function() {
   function addUICardsToCardStore(context){
     $(context).each(function( i , elem ){
         var currentCard = $(this).html();
+        //var currentId = $(currentCard).find('a')
+        //console.log("I AM CARD NUMBER" + i + " : " + currentCard);
         //console.log( $(this) );
         cardStore.push(currentCard)
     })
@@ -118,6 +123,7 @@ $(function() {
           console.log("attempt number " + key + ": " + attempt );
           cardNames.push(attempt);
         }
+        console.log(cardNames);
       });
     });
   }
