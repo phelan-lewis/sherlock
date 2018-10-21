@@ -1,6 +1,12 @@
 # Project Sherlock
 
-This is a project to help with business coaching call
+As the emphasis on business coaching increases, gurus need to be able to identify the type of merchant and their needs at a glance. Project Sherlock, through a Chrome Extension, can provide our gurus with a merchant identifier (i.e. dropshipper, maker, etc.), business coaching talking points and also links to relevant resources.
+
+Whant to find out more? <a href="https://unicorn.shopify.io/projects/5911">Check out our Unicorn page here</a> for weekly updates!
+
+Want to help? <a href="https://docs.google.com/document/d/1ooCyXIGvd4QA_cb6SAiQKnUyGkdNm51tZH5BYobJJ6c/edit#">Read through our feature roadmap</a> and see where we are at. 
+
+Got questions? Reach out to @Phelan.Lewis or @Jordan.Wille on slack.
 
 ## Installation Process
 
